@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 
 const form = ref({
   gender: 'male',
-  age: 0,
+  age: 15,
   weight: 0,
   height: 0,
 });
@@ -38,16 +38,19 @@ const calories = computed(() => {
 
           <div class="col-12 col-md-6 mb-3">
             <label for="age" class="form-label">Age:</label>
-
-            <input
-              type="number"
-              name="age"
-              class="form-control form-control-lg"
-              inputmode="numeric"
-              pattern="[0-9]*"
-              min="0"
-              v-model.number="form.age"
-            />
+            <div class="input-group">
+              <input
+                type="number"
+                name="age"
+                class="form-control form-control-lg"
+                pattern="[0-9]*"
+                min="15"
+                max="85"
+                v-model.number="form.age"
+                required
+              />
+              <span class="input-group-text">15-20</span>
+            </div>
           </div>
 
           <div class="col-12 col-md-6 mb-3">
@@ -57,7 +60,6 @@ const calories = computed(() => {
                 type="number"
                 name="height"
                 class="form-control form-control-lg"
-                inputmode="numeric"
                 pattern="[0-9]*"
                 min="0"
                 v-model.number="form.height"
@@ -73,7 +75,6 @@ const calories = computed(() => {
                 type="number"
                 class="form-control form-control-lg"
                 name="weight"
-                inputmode="numeric"
                 pattern="[0-9]*"
                 min="0"
                 v-model.number="form.weight"
