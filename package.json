@@ -2,6 +2,17 @@
   "name": "vite-bmi-app",
   "private": true,
   "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webceyhan/vite-bmi-app.git"
+  },
+  "keywords": [],
+  "author": "Evren Ceyhan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webceyhan/vite-bmi-app/issues"
+  },
+  "homepage": "https://github.com/webceyhan/vite-bmi-app#readme",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
