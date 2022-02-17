@@ -43,7 +43,7 @@ const bmr = computed(() => {
   <div class="container p-lg-5">
     <h1 class="display-5">BMI/BMR Calculator</h1>
 
-    <div class="card bg-light mb-4">
+    <div class="card bg-light shadow mb-4">
       <div class="card-body p-4">
         <form class="row">
           <div class="col-12 col-md-6 mb-3">
@@ -104,7 +104,7 @@ const bmr = computed(() => {
       </div>
     </div>
 
-    <div class="card">
+    <div class="card bg-dark text-light shadow">
       <div class="card-body p-4">
         <h4 class="card-title">Your results</h4>
 
@@ -126,7 +126,7 @@ const bmr = computed(() => {
           <span :class="`text-${bmi.color}`">{{ bmr }}</span> kcal / day
         </p>
 
-        <!-- <input class="form-control form-control-lg" readonly v-model="calories" /> -->
+        
       </div>
     </div>
   </div>
