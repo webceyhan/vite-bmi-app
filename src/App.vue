@@ -5,27 +5,33 @@ import { computed, ref } from 'vue';
 const form = ref({
   gender: 'male',
   age: 15,
-  weight: 0,
-  height: 0,
+  height: 150,
+  weight: 50,
 });
 
 const bmiMap = {
-  underweight: {  label: 'Underweight', color: 'info' },
+  underweight: { label: 'Underweight', color: 'info' },
   normal: { label: 'Normal', color: 'success' },
   overweight: { label: 'Overweight', color: 'warning' },
   obesity: { label: 'Obesity', color: 'danger' },
 }
 
 const bmi = computed(() => {
-  const { weight, height } = form.value;
+  const { weight, height, age } = form.value;
   const value = ((weight / height / height) * 10000).toFixed(2);
 
-  if (value < 18.5) return { ...bmiMap.underweight, value };
-  if (value < 25) return { ...bmiMap.normal, value };
-  if (value < 30) return { ...bmiMap.overweight, value };
-  return { ...bmiMap.obesity, value };
-
-})
+  if (age >= 20) { // adults
+    if (value < 18.5) return { ...bmiMap.underweight, value };
+    if (value < 25) return { ...bmiMap.normal, value };
+    if (value < 30) return { ...bmiMap.overweight, value };
+    return { ...bmiMap.obesity, value };
+  } else { // kids
+    if (value < 20.7) return { ...bmiMap.underweight, value };
+    if (value < 34) return { ...bmiMap.normal, value };
+    if (value < 39.8) return { ...bmiMap.overweight, value };
+    return { ...bmiMap.obesity, value };
+  }
+});
 
 const bmr = computed(() => {
   // get input values
@@ -56,19 +62,16 @@ const bmr = computed(() => {
 
           <div class="col-12 col-md-6 mb-3">
             <label for="age" class="form-label">Age:</label>
-            <div class="input-group">
-              <input
-                type="number"
-                name="age"
-                class="form-control form-control-lg"
-                pattern="[0-9]*"
-                min="15"
-                max="85"
-                v-model.number="form.age"
-                required
-              />
-              <span class="input-group-text">15-20</span>
-            </div>
+            <input
+              type="number"
+              name="age"
+              class="form-control form-control-lg"
+              pattern="[0-9]*"
+              min="15"
+              max="85"
+              v-model.number="form.age"
+              required
+            />
           </div>
 
           <div class="col-12 col-md-6 mb-3">
@@ -110,23 +113,26 @@ const bmr = computed(() => {
 
         <hr />
 
-        <p class="mb-2">
-          Body Mass Index (BMI):
-          <span :class="`text-${bmi.color}`">{{ bmi.value }}</span>
-        </p>
+        <dl class="row mb-2">
+          <dt class="col-12 col-md">Body Mass Index (BMI):</dt>
+          <dd class="col-12 col-md">
+            <span :class="`text-${bmi.color}`">{{ bmi.value }}</span>
+          </dd>
+        </dl>
 
         <div class="progress mb-4" style="height: 1.5rem;">
-          <div :class="`progress-bar bg-${bmi.color}`" :style="{width: `${bmi.value}%`}">
-          {{bmi.label}}
-          </div>
+          <div
+            :class="`progress-bar bg-${bmi.color}`"
+            :style="{ width: `${bmi.value}%` }"
+          >{{ bmi.label }}</div>
         </div>
 
-        <p class="mb-2">
-          The Basal Metabolic Rate (BMR):
-          <span :class="`text-${bmi.color}`">{{ bmr }}</span> kcal / day
-        </p>
-
-        
+        <dl class="row mb-2">
+          <dt class="col-12 col-md">The Basal Metabolic Rate (BMR):</dt>
+          <dd class="col-12 col-md">
+            <span :class="`text-${bmi.color}`">{{ bmr }}</span> kcal / day
+          </dd>
+        </dl>
       </div>
     </div>
   </div>
