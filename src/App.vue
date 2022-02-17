@@ -25,8 +25,8 @@ const calories = computed(() => {
   <div class="container p-lg-5">
     <h1 class="display-5">BMI Calculator</h1>
 
-    <div class="card bg-light mb-4 mx-auto">
-      <div class="card-body">
+    <div class="card bg-light mb-4">
+      <div class="card-body p-4">
         <form class="row">
           <div class="col-12 col-md-6 mb-3">
             <label for="gender" class="form-label">Gender:</label>
@@ -86,9 +86,17 @@ const calories = computed(() => {
       </div>
     </div>
 
-    <div>
-      <h6>The Basal Metabolic Rate (BMR):</h6>
-      <input class="form-control form-control-lg" readonly v-model="calories" />
+    <div class="card">
+      <div class="card-body p-4">
+        <h6 class="card-title">The Basal Metabolic Rate (BMR):</h6>
+
+        <p class="card-text">
+          BMR =
+          <span class="text-success">{{ calories }}</span> kcal / day
+        </p>
+
+        <!-- <input class="form-control form-control-lg" readonly v-model="calories" /> -->
+      </div>
     </div>
   </div>
 </template>
